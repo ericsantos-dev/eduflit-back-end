@@ -1,5 +1,13 @@
-import app from './index';
-import AppDataSource from './database/config';
+// src/server.ts
+import 'reflect-metadata';
+import app from './index';           // o express app
+import AppDataSource from './database/config';  // seu data-source
+import dotenv from 'dotenv';
+
+// carrega .env apenas localmente
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const PORT = process.env.PORT || 3001;
 

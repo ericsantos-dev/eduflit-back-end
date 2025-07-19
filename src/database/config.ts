@@ -1,10 +1,13 @@
+// src/data-source.ts
 import { DataSource } from 'typeorm';
-import dotenv from 'dotenv';
-dotenv.config();
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const AppDataSource = new DataSource({
   type: 'postgres',
-  host: process.env.PG_HOST,
+  host: process.env.PG_HOST,                
   port: parseInt(process.env.PG_PORT || '5432'),
   username: process.env.PG_USUARIO,
   password: process.env.PG_SENHA,
