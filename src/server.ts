@@ -1,5 +1,4 @@
 // src/server.ts
-import 'reflect-metadata';
 import app from './index';           // o express app
 import AppDataSource from './database/config';  // seu data-source
 import dotenv from 'dotenv';

@@ -1,4 +1,3 @@
-import 'reflect-metadata';               
 import { DataSource } from 'typeorm';
 import { User } from '../models/User';
 if (process.env.NODE_ENV !== 'production') {
