@@ -1,6 +1,6 @@
 // src/data-source.ts
 import { DataSource } from 'typeorm';
-
+import { User } from '../models/User';
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -14,7 +14,7 @@ const AppDataSource = new DataSource({
   database: process.env.PG_BANCO,
   synchronize: true,
   logging: true,
-  entities: [`${__dirname}/../models/*.{js,ts}`],
+  entities: [User],
   subscribers: [],
 });
 
