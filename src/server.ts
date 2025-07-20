@@ -1,17 +1,18 @@
 // src/server.ts
-import app from './index';           
-import AppDataSource from './database/config';  
-import http from 'http'
-const PORT = process.env.PORT || 3001;
+import app from './index';           // o express app
+import AppDataSource from './database/config';  // seu data-source
+import dotenv from 'dotenv';
 
-const server = http.createServer(app)
+  dotenv.config();
+
+const PORT = process.env.PORT || 3001;
 
 const startServer = async () => {
   try {
     await AppDataSource.initialize();
     console.log('Database OK');
 
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Servidor rodando em http://localhost:${PORT}`);
     });
   } catch (error) {
