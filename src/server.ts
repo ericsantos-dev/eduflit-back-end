@@ -1,23 +1,25 @@
 // src/server.ts
-import app from './index';           // o express app
-import AppDataSource from './database/config';  // seu data-source
 import dotenv from 'dotenv';
+import http from 'http';
+import app from './index'; // Express app
+import AppDataSource from './database/config'; // Data source (ex: TypeORM)
 
-  dotenv.config();
+dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 
-const startServer = async () => {
+// Cria o servidor HTTP a partir do Express
+const server = http.createServer(app);
+
+(async () => {
   try {
     await AppDataSource.initialize();
-    console.log('Database OK');
+    console.log('📦 Banco de dados conectado com sucesso');
 
-    app.listen(PORT, () => {
-      console.log(`Servidor rodando em http://localhost:${PORT}`);
+    server.listen(PORT, () => {
+      console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error('Erro ao inicializar o Data Source:', error);
+    console.error('❌ Erro ao inicializar o banco de dados:', error);
   }
-};
-
-startServer();
+})();
