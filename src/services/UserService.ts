@@ -1,24 +1,15 @@
-import AppDataSource from '../database/config';
-import { Repository } from 'typeorm';
-import { User} from '../models/User';
+import { User } from '../models/User';
 import CustomError from '../utils/CustomError';
 
 class UserService {
-  private userRepository: Repository<User>;
-
-  constructor() {
-    this.userRepository = AppDataSource.getRepository(User);
-  }
-
   public async fetchAllUsers() {
     try {
-      const users = await this.userRepository.find();
+      const users = await User.findAll();
       if (users.length === 0) {
         throw new CustomError('No users found', 404, 'NO_USERS_FOUND');
       }
       return users;
     } catch (error) {
-      if (error instanceof CustomError) throw error;
       throw new CustomError(
         `Error fetching users: ${error instanceof Error ? error.message : String(error)}`,
         500,
@@ -29,11 +20,10 @@ class UserService {
 
   public async fetchUserById(id: number) {
     try {
-      const user = await this.userRepository.findOneBy({ id });
+      const user = await User.findByPk(id);
       if (!user) throw new CustomError('User not found', 404, 'USER_NOT_FOUND');
       return user;
     } catch (error) {
-      if (error instanceof CustomError) throw error;
       throw new CustomError(
         `Error fetching user: ${error instanceof Error ? error.message : String(error)}`,
         500,
@@ -44,11 +34,10 @@ class UserService {
 
   public async fetchUserByEmail(email: string) {
     try {
-      const user = await this.userRepository.findOneBy({ email });
+      const user = await User.findOne({ where: { email } });
       if (!user) throw new CustomError('User not found', 404, 'USER_NOT_FOUND');
       return user;
     } catch (error) {
-      if (error instanceof CustomError) throw error;
       throw new CustomError(
         `Error fetching user by email: ${error instanceof Error ? error.message : String(error)}`,
         500,
@@ -59,8 +48,8 @@ class UserService {
 
   public async createUser(data: Partial<User>) {
     try {
-      const user = this.userRepository.create(data);
-      return await this.userRepository.save(user);
+      const user = await User.create(data);
+      return user;
     } catch (error) {
       throw new CustomError(
         `Error creating user: ${error instanceof Error ? error.message : String(error)}`,
@@ -73,10 +62,9 @@ class UserService {
   public async updateUser(id: number, updatedData: Partial<User>) {
     try {
       const user = await this.fetchUserById(id);
-      Object.assign(user, updatedData);
-      return await this.userRepository.save(user);
+      await user.update(updatedData);
+      return user;
     } catch (error) {
-      if (error instanceof CustomError) throw error;
       throw new CustomError(
         `Error updating user: ${error instanceof Error ? error.message : String(error)}`,
         500,
@@ -88,10 +76,9 @@ class UserService {
   public async deleteUser(id: number) {
     try {
       const user = await this.fetchUserById(id);
-      await this.userRepository.remove(user);
+      await user.destroy();
       return { message: 'User successfully deleted.' };
     } catch (error) {
-      if (error instanceof CustomError) throw error;
       throw new CustomError(
         `Error deleting user: ${error instanceof Error ? error.message : String(error)}`,
         500,
@@ -102,7 +89,7 @@ class UserService {
 
   public async getTotalUsers() {
     try {
-      const count = await this.userRepository.count();
+      const count = await User.count();
       return { totalUsers: count };
     } catch (error) {
       throw new CustomError(
