@@ -1,9 +1,8 @@
 import { DataSource } from 'typeorm';
 import { User } from '../models/User';
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+import dotenv from 'dotenv';
 
+  dotenv.config();
 const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.PG_HOST,                

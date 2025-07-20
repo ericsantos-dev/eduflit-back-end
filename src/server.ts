@@ -1,12 +1,6 @@
 // src/server.ts
-import app from './index';           // o express app
-import AppDataSource from './database/config';  // seu data-source
-import dotenv from 'dotenv';
-
-// carrega .env apenas localmente
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
+import app from './index';           
+import AppDataSource from './database/config';  
 
 const PORT = process.env.PORT || 3001;
 

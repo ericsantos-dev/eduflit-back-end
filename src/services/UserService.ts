@@ -1,6 +1,6 @@
 import AppDataSource from '../database/config';
 import { Repository } from 'typeorm';
-import { User, UserType } from '../models/User';
+import { User} from '../models/User';
 import CustomError from '../utils/CustomError';
 
 class UserService {
