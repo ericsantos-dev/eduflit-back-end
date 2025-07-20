@@ -16,4 +16,9 @@ const AppDataSource = new DataSource({
   subscribers: [],
 });
 
+export const initializeDatabase = async () => {
+  await AppDataSource.initialize()
+    .then(() => console.log("DATABASE INITIALIZED"))
+    .catch((error) => console.log("ERROR TO INITIALIZE DATABASE:", error));
+};
 export default AppDataSource;
