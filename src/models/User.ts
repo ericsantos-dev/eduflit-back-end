@@ -13,7 +13,6 @@ export class User extends Model {
   public password!: string;
   public birthDate!: string;
   public type!: UserType;
-  public createdAt!: Date;
 }
 
 User.init(
@@ -50,11 +49,7 @@ User.init(
       allowNull: false,
     },
 
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-      field: 'created_at', // se quiser mapear para snake_case no banco
-    },
+   
   },
   {
     sequelize,
