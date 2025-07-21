@@ -9,5 +9,6 @@ export const sequelize = new Sequelize({
   username: process.env.PG_USUARIO,
   password: process.env.PG_SENHA,
   database: process.env.PG_BANCO,
+  dialect: 'postgres',  // <--- aqui
   logging: console.log,
 });
