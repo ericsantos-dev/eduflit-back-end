@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
-     "start": "node dist/server.js",
+    "start": "node dist/server.js",
     "lint": "eslint src/**/*.{js,ts}",
     "lint-fix": "eslint ./src .test --ext .ts --fix",
     "build": "tsc",
@@ -32,6 +32,7 @@
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.7",
+    "serverless-http": "^3.2.0",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
