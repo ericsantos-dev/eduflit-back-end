@@ -5,7 +5,6 @@ import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import router from './routes';
-import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { sequelize } from './database/config';
@@ -15,7 +14,6 @@ export class App {
 	private porta: number = Number(process.env.PORT) || 5000;
 
 	constructor() {
-		dotenv.config();
 		this.expressApp = express();
 		this.database();
 		this.middlewares();
