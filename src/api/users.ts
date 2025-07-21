@@ -77,4 +77,4 @@ app.get('/users/total/count', async (_req, res) => {
   }
 });
 
-export default serverless(app);
+export default app;
