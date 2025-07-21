@@ -1,10 +1,10 @@
 import express from 'express';
 import serverless from 'serverless-http';
-import userRoutes from './users';
+import users from './users';
 
 const app = express();
 app.use(express.json());
 
-app.use('/', userRoutes);
+app.use('/', users);
 
 export default serverless(app);
