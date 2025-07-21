@@ -9,12 +9,6 @@ var UserType;
     UserType["TEACHER"] = "teacher";
 })(UserType || (exports.UserType = UserType = {}));
 class User extends sequelize_1.Model {
-    id;
-    name;
-    email;
-    password;
-    birthDate;
-    type;
 }
 exports.User = User;
 User.init({
