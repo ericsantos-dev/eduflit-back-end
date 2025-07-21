@@ -1,3 +1,4 @@
-export default function handler(req, res) {
-  res.status(200).json({ message: "Olá do back-end serverless da Vercel!" });
-}
+import serverless from "serverless-http";
+import app from "../dist/server"; 
+
+export const handler = serverless(app)
