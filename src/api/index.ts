@@ -1,5 +1,10 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import express from 'express';
+import serverless from 'serverless-http';
+import userRoutes from './users';
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  res.status(200).json({ message: 'API funcionando com Vercel + TypeScript!' });
-}
+const app = express();
+app.use(express.json());
+
+app.use('/', userRoutes);
+
+export default serverless(app);
