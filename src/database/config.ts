@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const sequelize = new Sequelize({
-  dialect: 'postgres',
   host: process.env.PG_HOST,
   port: parseInt(process.env.PG_PORT || '5432'),
   username: process.env.PG_USUARIO,
